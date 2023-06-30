@@ -2,6 +2,8 @@
 
 This repository contains code and information related to conducting experiments on Named Entity Recognition (NER) for Bangla language using SpaCy. The goal of these experiments is to develop and evaluate NER models specifically tailored for extracting person entities from Bangla text.
 
+We performed 10 different experiment on transition based and transformer based model using spacy. Finaly we achieved best result `F1 score ~.85`
+
 ## Dataset
 
 Data has been collected from THREE different sources.
@@ -32,6 +34,7 @@ The dataset consists of labeled Bangla text samples, where each sample is annota
   <tr>
     <td valign="top"><img src="notebooks/images/banglakit.png"/></td>
     <td valign="top"><img src="notebooks/images/bengali-ner.png"/></td>
+    <td valign="top"><img src="notebooks/images/BNER.png"/></td>
   </tr>
 </table>
 
@@ -44,8 +47,8 @@ To create a focused dataset specifically for person entity extraction, the follo
 3. <span style="color:orange;">Data Size</span>: After the above preprocessing steps, the dataset size was reduced to a more manageable number of sentences that specifically contained person entity labels.
 
 After processing total number of data
-- Considering only person entity tag [8667]()
-- Considering all type of entity tags [18109]()
+- Considering only person entity tag [2895]()
+- Considering all type of entity tags [6685]()
 
 To run preprocessing steps execute following command
 ```
@@ -95,6 +98,50 @@ This command will convert the training_data.json file to spaCy format and save i
 ```
 !python -m spacy evaluate output/model-best data/test.spacy --gpu-id 0
 ```
+
+## Training and Testing in Kaggle
+
+The dataset and pretrained model with traning and testing script is shared in kaggle.
+
+Follow this [kaggle link](https://www.kaggle.com/code/aminulpalash/spacy-transformer-train-test/notebook#Testing-with-input-Text-with-only-Person-entity-trained-model) to run and test.
+
+
+## Interence Spacy Transformer model
+
+```
+import spacy_transformers
+import spacy
+
+nlp = spacy.load("/kaggle/input/bner-trained-modesl/output/model-best")
+
+text_list = [
+    "বিএনপি নেতাদের সবচেয়ে বড় দুর্বলতা তাঁরা রাজনৈতিক কর্মী আর সন্ত্রাসী গুলিয়ে ফেলেছেন বলে মন্তব্য করেছেন তথ্যমন্ত্রী হাছান মাহমুদ",
+    "আব্দুর রহিম নামের কাস্টমারকে একশ টাকা বাকি দিলাম",
+    "ড. হাছান বলেন, দেশ যখন জননেত্রী শেখ হাসিনার নেতৃত্বে এগিয়ে যাচ্ছে, তখন দেশি-বিদেশি নানা ষড়যন্ত্র শুরু হয়েছে।"
+    ]
+for text in text_list:
+    doc = nlp(text)
+
+    print(f"Input Text: {text}")
+    for entity in doc.ents:
+        print(f"( {entity.text}, {entity.label_})")
+    print("----------------------------------------------------")
+
+## outputs
+
+Input Text: বিএনপি নেতাদের সবচেয়ে বড় দুর্বলতা তাঁরা রাজনৈতিক কর্মী আর সন্ত্রাসী গুলিয়ে ফেলেছেন বলে মন্তব্য করেছেন তথ্যমন্ত্রী হাছান মাহমুদ
+( হাছান মাহমুদ, PER)
+----------------------------------------------------
+Input Text: আব্দুর রহিম নামের কাস্টমারকে একশ টাকা বাকি দিলাম
+( আব্দুর রহিম, PER)
+----------------------------------------------------
+Input Text: ড. হাছান বলেন, দেশ যখন জননেত্রী শেখ হাসিনার নেতৃত্বে এগিয়ে যাচ্ছে, তখন দেশি-বিদেশি নানা ষড়যন্ত্র শুরু হয়েছে।
+( ড. হাছান, PER)
+( শেখ হাসিনার, PER)
+----------------------------------------------------
+
+```
+
 
 ## Experiment Details
 
