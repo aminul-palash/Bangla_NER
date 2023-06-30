@@ -4,6 +4,17 @@ This repository contains code and information related to conducting experiments 
 
 We performed 10 different experiment on transition based and transformer based model using spacy. Finaly we achieved best result `F1 score ~.85`
 
+## Thought Process
+
+The steps I have followed for this project are not different from my usual AI-related projects. 
+ - Read some paper works and methods on NER extractions from Google Scholar and Articles. 
+ - After research and study I have decided to use SPACY Library for this task. Spacy is very popular library for NLP related task.
+ - Go through Spacy library for NER related task specialy for Bangla language.
+ - Perform exploratory data exploration and analysis. Find the dataset format and entity labels. Check entity amount and variations.
+ - After thoroughly checking the data I have write scripts for preprocessing by keeping all entity and only person entity. The reason I do this, there is not sufficient amount of data and not completely sure which one perform better. Instead of doing guessing why not give it a try ? 
+ - Seletcted spacy transition based and transformer based model from spacy training documentation.
+ - Performed 10 types of different experiment to see which way should i go and get best performance.
+
 ## Dataset
 
 Data has been collected from THREE different sources.
