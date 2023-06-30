@@ -108,6 +108,8 @@ Follow this [kaggle link](https://www.kaggle.com/code/aminulpalash/spacy-transfo
 
 ## Interence Spacy Transformer model
 
+Download [Pretrained](https://www.kaggle.com/datasets/aminulpalash/bner-trained-modesl?sort=votes) model from path output/model-best
+
 ```
 import spacy_transformers
 import spacy
