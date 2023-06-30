@@ -4,10 +4,14 @@
 
 - <span style="color:orange;">Approaches</span>: Transition-based model and Transformer-based model.
 
-- <span style="color:orange;">Datasets</span>: Two types of datasets were used for each model:
-
-  1. All Entity Types (including person, organization, location, etc. annotations). Total datset amount is 6685
+- <span style="color:orange;">Datasets</span>: Two and three types of datasets combinely were used for each model:
+> - Two dataset (Benglakit , bangla-ner)
+  1. All Entity Types (including person, organization, location, etc. annotations). Total dataset amount is 6685
   2. Only Person Entities (annotations specifically for person entities). Total dataset amount is 2895
+
+> - Three dataset (B-NER, Benglai-ner, Banglakit)
+   1. Only Person Entities (annotations specifically for person entities). Total dataset amount is 8667
+   2. All Entity Types (including person, organization, location, etc. annotations). Total dataset amount is 18109
 
 
 - <span style="color:orange;">Dataset Splitting</span>: The datasets were split into the following subsets:
