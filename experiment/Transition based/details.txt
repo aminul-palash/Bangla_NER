@@ -1,0 +1,55 @@
+Experiment 1 (80% 10% 10%)
+
+Trained only person entity dataset
+
+Total Data: 2895
+
+Training set size: 2316
+Validation set size: 289
+Test set size: 290
+
+Model Architecture: TransitionBasedParser
+
+----------------------------------------------------------------
+
+Experiment 2 (80% 10% 10%)
+
+Trained combining all entity dataset
+
+Total Data: 6685
+
+Training set size: 5348
+Validation set size: 668
+Test set size: 669
+
+Model Architecture: TransitionBasedParser
+
+----------------------------------------------------------------
+
+Experiment 3 (60% 20% 20%)
+
+Trained only person entity dataset
+
+Total Data: 2895
+
+Training set size: 1737
+Validation set size: 579
+Test set size: 579
+
+Model Architecture: TransitionBasedParser
+
+----------------------------------------------------------------
+
+Experiment 2 (60% 20% 20%)
+
+Trained combining all entity dataset
+
+Total Data: 6685
+
+Training set size: 4011
+Validation set size: 1337
+Test set size: 1337
+
+Model Architecture: TransitionBasedParser
+
+----------------------------------------------------------------
