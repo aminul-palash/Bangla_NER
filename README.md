@@ -44,8 +44,8 @@ To create a focused dataset specifically for person entity extraction, the follo
 3. <span style="color:orange;">Data Size</span>: After the above preprocessing steps, the dataset size was reduced to a more manageable number of sentences that specifically contained person entity labels.
 
 After processing total number of data
-- Considering only person entity tag [2895]()
-- Considering all type of entity tags [6685]()
+- Considering only person entity tag [8667]()
+- Considering all type of entity tags [18109]()
 
 To run preprocessing steps execute following command
 ```
