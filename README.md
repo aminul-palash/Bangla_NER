@@ -4,7 +4,7 @@ This repository contains code and information related to conducting experiments 
 
 ## Dataset
 
-Data has been collected from two different sources.
+Data has been collected from THREE different sources.
 
 1. [Bengali-NER](https://github.com/Rifat1493/Bengali-NER/tree/master/annotated%20data)
 2. [banglakit](https://raw.githubusercontent.com/banglakit/bengali-ner-data/master/main.jsonl)
@@ -15,6 +15,13 @@ Data has been collected from two different sources.
 pip install spacy
 pip install transformers
 pip install spacy-transformers  
+```
+
+### Training and Evaluvation Environment
+
+```
+Google Colab GPU
+Kggle GPU
 ```
 
 ## Data Processing
@@ -42,13 +49,14 @@ After processing total number of data
 
 To run preprocessing steps execute following command
 ```
-python scripts/data_processing.py data/all_data.txt data/main.jsonl
+python scripts/data_processing.py data/all_data.txt data/B-NER.txt data/main.jsonl
 ```
 ### Arguments
 
 The script accepts the following command-line arguments:
 
 - <span style="color:orange;">iob_data_path</span>: Path to the IOB data file. which is banglakit ner dataset.
+- <span style="color:orange;">iob_data_path</span>: Path to the text data file. which is B-NER dataset.
 - <span style="color:orange;">jsonl_data_path</span>: Path to the JSONL data file. which is bengali-ner dataset.
 
 Ensure that you provide the correct file paths as arguments when running the script.
@@ -61,52 +69,33 @@ we are demonstrating token-level entity annotation using the BILUO tagging schem
 
 <img src = "https://miro.medium.com/max/875/1*_sYTlDj2p_p-pcSRK25h-Q.png">
 
+## Training Procedure
 
+1. <span style="color:orange;">Prepare your training data</span>: Create a JSON or CSV file containing your annotated training examples. Each example should include the text and the annotated entities. After running above preprocessing steps we will get expected json format file.
+2. <span style="color:orange;">Dataset split</span>: in 80% training and 10% testing and 10% validation.
+3. <span style="color:orange;">Convert the training data to spaCy format</span>: Use the convert command to convert your training data to spaCy's binary format. For example:
+```
+python -m spacy convert training_data.json ./output -t json
+```
+This command will convert the training_data.json file to spaCy format and save it in the output directory. <br>
+4. <span style="color:orange;">Create a new configuration file</span>: Create a new configuration file (base_config.cfg) where you can define your training settings and pipeline components. Refer to spaCy's [documentation](https://spacy.io/usage/training) for more details on configuring your model.
+
+<img src="notebooks/images/spacy_training.png"/>
+
+5. Create training config file from base config using below command
+```
+!python -m spacy init fill-config base_config.cfg config.cfg
+```
+6. <span style="color:orange;">Train the model</span>: Use the train command to train the model. For example:
+```
+!python -m spacy train config.cfg --output ./output --paths.train data/train.spacy --paths.dev data/val.spacy --gpu-id 0
+```
+
+7. <span style="color:orange;">Evaluate the model</span>: Use the evaluate command to evaluate the model's performance. For example:
+```
+!python -m spacy evaluate output/model-best data/test.spacy --gpu-id 0
+```
 
 ## Experiment Details
 
-
-- <span style="color:orange;">Objective</span>: Train and evaluate Spacy NER models for person entity extraction from Bangla text.
-
-- <span style="color:orange;">Approaches</span>: Transition-based model and Transformer-based model.
-
-- <span style="color:orange;">Datasets</span>: Two types of datasets were used for each model:
-
-  1. All Entity Types (including person, organization, location, etc. annotations). Total datset amount is 6685
-  2. Only Person Entities (annotations specifically for person entities). Total dataset amount is 2895
-
-
-- <span style="color:orange;">Dataset Splitting</span>: The datasets were split into the following subsets:
-  ```
-  Training set: 80% of the data.
-  Validation set: 10% of the data.
-  Test set: 10% of the data.
-  ```
-  ```
-  Training set: 60% of the data.
-  Validation set: 20% of the data.
-  Test set: 20% of the data.
-  ```
-  
-- <span style="color:orange;">Model Training</span>: Each model was trained using the respective datasets.
-
-- <span style="color:orange;">Evaluation</span>: Separate test datasets were used to evaluate the performance of each model.
-
-- <span style="color:orange;">Results</span>:
-
-This table shows the results of training NER model consideing only person entity dataset. We have achieved better accuracy on test dataset on transformer based model with training data spliting with 80%. 
-
-<img src="notebooks/images/result_only_person_entity.png"/></td>
-
-This table shows the results of training NER model consideing all type of entity dataset. We have achieved better accuracy on test dataset on transformer based model with training data spliting with 80%. 
-
-<img src="notebooks/images/result_all_entity.png"/></td>
-
-
-
-
-
-
-
-
-
+Please Follow this [link](./experiment/) to see details experiments methods and comparative results.

@@ -362,7 +362,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Merge BLIOU JSON files")
     parser.add_argument("iob_data_path", type=str, help="Path to the IOB data file")
-    parser.add_argument("BNER_data_path", type=str, help="Path to the JSONL data file")
+    parser.add_argument("BNER_data_path", type=str, help="Path to the text data file")
     parser.add_argument("jsonl_data_path", type=str, help="Path to the JSONL data file")
 
     args = parser.parse_args()
